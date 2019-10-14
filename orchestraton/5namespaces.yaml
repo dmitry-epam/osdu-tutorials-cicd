@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: Production
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: Development
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: Istio-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: Monitoring
