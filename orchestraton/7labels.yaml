@@ -1,0 +1,31 @@
+apiVersion: v1 
+kind: Deployment
+metadata:
+  name: search
+  labels:
+   environment: qa
+    app: search
+  replicas: 4
+spec:
+  containers:
+  - name: search
+    image: search:latest
+    ports:
+    - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+  namespace: default
+  labels:
+    app: search
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: search
+  type: ClusterIP
