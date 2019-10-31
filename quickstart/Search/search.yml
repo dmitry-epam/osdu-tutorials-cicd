@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: search
+spec:
+  selector:
+    matchLabels:
+      app: search
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      containers:
+      - name: search
+        image: docker.io/yourhubusername/search:1.0 #Change yourhubusername
+        ports:
+        - containerPort: 8080
+        env:
+        - name: OSDU_API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: baseurl
+              key: OSDU_API_BASE_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+  namespace: default
+  labels:
+    app: search
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: search
+  type: ClusterIP
+

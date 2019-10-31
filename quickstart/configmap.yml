@@ -1,0 +1,15 @@
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: baseurl
+    namespace: default
+  data:
+    OSDU_API_BASE_URL: 
+    OSDU_AUTH_BASE_URL: 
+    OSDU_CLIENT_ID: 
+    OSDU_CLIENT_SECRET: 
+    # Should be deleted:
+    #OSDU_API_BASE_URL: https://osdu-demo-portal-dev.azure-api.net
+    #OSDU_AUTH_BASE_URL: https://login.microsoftonline.com/b41b72d0-4e9f-4c26-8a69-f949f367c91d/v2.0
+    #OSDU_CLIENT_ID: a32884ab-68ec-4b5d-b746-87bad79a8339
+    #OSDU_CLIENT_SECRET: uhsr/nf.8b9?w2m9=KxqQ6P[=]v54R88 

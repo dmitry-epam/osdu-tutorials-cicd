@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: fetch
+spec:
+  selector:
+    matchLabels:
+      app: fetch
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: fetch
+    spec:
+      containers:
+      - name: fetch
+        image: docker.io/yourhubusername/fetch:1.0 #Change yourhubusername
+        ports:
+        - containerPort: 8080
+        env:
+        - name: OSDU_API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: baseurl
+              key: OSDU_API_BASE_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fetch
+  namespace: default
+  labels:
+    app: fetch
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: fetch
+  type: ClusterIP
+
